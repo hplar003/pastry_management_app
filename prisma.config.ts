@@ -1,8 +1,8 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
-// CLI-only config (migrate, studio). Uses Supabase's direct connection;
-// the app itself connects through the pooled DATABASE_URL via @prisma/adapter-pg.
+// CLI-only config (migrate, studio). Uses Neon's direct (unpooled) connection;
+// the app itself connects through the pooled DATABASE_URL via @prisma/adapter-neon.
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
@@ -10,6 +10,6 @@ export default defineConfig({
     seed: "tsx prisma/seed.ts",
   },
   datasource: {
-    url: process.env["DIRECT_URL"],
+    url: process.env["DATABASE_URL_UNPOOLED"],
   },
 });
